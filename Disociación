@@ -1,0 +1,23 @@
+# Paquetes
+if(!require("pacman")) install.packages("pacman")
+library(pacman)
+p_load(vroom, ggplot2)
+
+#Pasar los datos a mi gibhut en formato RAW
+#Cargar los datos de melting
+Melting <- vroom("https://raw.githubusercontent.com/ManuelLaraMVZ/resultados_PCR_practica/refs/heads/main/Metabo_ago-dic2025_Melting.csv")
+head(Melting)
+# Graficar solo el pozo A1
+graficaMelt<- ggplot(Melting, aes(x = Temperature, 
+                                  y = A1)) +
+  geom_line(color = "#211C5C", size = 0.6) +
+  geom_point(size = 0.8, color = "#5C1C40") +
+  theme_classic() +
+  labs(
+    title = "Curva de disociación - Pozo A1",
+    subtitle = "Higado 5µg pásmido con gen GFP",
+    caption = "Diseñado por Diego Sánchez",
+    x = "Temperatura (°C)",
+    y = "Fluorescencia"
+  )
+graficaMelt
