@@ -1,0 +1,21 @@
+# Paquetes
+if(!require("pacman")) install.packages("pacman")
+library(pacman)
+p_load(vroom, ggplot2)
+
+# Cargar los datos de amplificación
+Amplif <- vroom("https://raw.githubusercontent.com/ManuelLaraMVZ/resultados_PCR_practica/refs/heads/main/Metabo_ago-dic2025_Amplif.csv")  
+
+# Graficar solo el pozo A1
+graficaAmp <- ggplot(Amplif, aes(x = Cycle, y = A1)) +
+  geom_line(color = "#B88256", size = 0.7) +
+  geom_point(size = 0.8, color = "#4C5C1C") +
+  theme_classic() +
+  labs(
+    title = "Curva de amplificación - Pozo A1",
+    subtitle = "Hígado 5 µl plásmido con gen GFP",
+    caption = "Diseñado por Diego Sánchez",
+    x = "Ciclo",
+    y = "Fluorescencia (RFU)"
+  )
+graficaAmp
